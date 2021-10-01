@@ -1,0 +1,66 @@
+﻿##Chức năng
+ - KH đăng kí tài khoản hệ thống
+ - KH đăng nhập tài khoản hệ thống
+ - KH có thể xem thông tin giới thiệu ngân hàng
+ - KH có thể góp ý, gửi phản hồi cho ngân hàng
+ - KH (sau khi đăng nhập) có thể gửi tiền vào ngân hàng
+ - KH (sau khi đăng nhập) có thể rút tiền khỏi ngân hàng
+ - KH (sau khi đăng nhập) có thể chuyển tiền trong ngân hàng
+ - KH (sau khi đăng nhập) xem thông tin tài khoản
+ - KH (sau khi đăng nhập) chỉnh sửa thông tin tài khoản
+ - KH (sau khi đăng nhập) mở/khoá giao dịch tài khoản (mở/khoá nhận tiền)
+ - KH (sau khi đăng nhâp) tra cứu lịch sử giao dịch trong tài khoản
+ - Admin có thể đăng nhâp với quyền admin
+ - Admin có thể duyệ/từ chối các tài khoản đăng kí
+ - Admin có thể tạo, sửa, xoá, các tài khoản admin khác
+ - Admin có thể chuyển trạng thái tài khoản ngân hàng (khoá/mở)
+ - Admin có thể tìm kiếm thông tin khách hàng theo: số tài khoản
+ - Admin có thể tìm kiếm thông tin khách hàng theo: số điện thoại
+ - Admin có thể tìm kiếm thông tin khách hàng theo: số cccd/cmnd
+ - Admin có thể kiểm tra lịch sử giao dịch theo số tài khoản
+### Use Case
+ - Role: Admin, User, Guest
+### Entity
+ - Admin.
+   - Id(string): số tk 
+   - Username(string): tên đăng nhập
+   - Password(string): mật khẩu
+   - Salt(string): muối
+   - FullName(string): tên
+   - Phone(string): số điện thoại
+   - CreatAt(DateTime): ngày mở tài khoản
+   - UpdateAt(DateTime): ngày update thông tin tài khoản
+   - DeleteAt(DateTime): ngày đóng tài khoản
+   - Status(int): trạng thái tài khoản: active(1), khoá(2), delete(-1)
+ - Account.
+   - Number (string): số tài khoản
+   - Type (int): cá nhân, doanh nghiệp
+   - Balance (double): số dư tài khoản
+   - Username (string): tài khoản đăng nhập
+   - Password (string): mật khẩu 
+   - Salt(string): muối
+   - LockTransaction(bool): khoá giao dịch,  nhưng vẫn đăng nhập được 
+
+   - FirstName (string): Họ
+   - LastName (string): Tên
+   - Email (string)
+   - IdentityNumber (string): cccd/cmcd
+   - Phone (string): số điện thoại
+   - Address 
+   - 
+   - CreatAt(DateTime): ngày mở tài khoản
+   - UpdateAt(DateTime): ngày update thông tin tài khoản
+   - DeleteAt(DateTime): ngày đóng tài khoản
+   - Status(int): trạng thái tài khoản: chưa active(0), đã active(1), khoá(2)(ko đăng nhập được), delete(-1)
+ - TransactionHistory:
+   - Id (string): mã giao dịch
+   - AccountNumber (khoá ngoại từ bảng Account): là giao dịch của tk nào
+   - SenderAccountNumber (string, Fk from Account): ai gửi tiền
+   - ReceiverAccountNumber (string, Fk from Account): ai nhận tiền
+   - Type (int): withdraw(1), deposit(2), tranfer(3)
+   - Amount(double): số tiền giao dịch
+   - Message(string): nội dung chuyển khoản
+   - 
+   - CreatAt(DateTime): ngày tạo giao dich
+   - Status(int): thành công(1), đang xử lí(2), thất bại(0)
+ - BankingInfomation(có thể dùng file text)
