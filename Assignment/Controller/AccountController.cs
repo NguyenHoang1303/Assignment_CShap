@@ -145,7 +145,7 @@ namespace Assignment.Controller
 
                 break;
             }
-
+            if (!Confirm.HandlerConfirm("Withdraw")) return;
             Account.Balance -= amount;
             var isWithdraw = _accountModel.HandlerBalanceTransaction(Account.Id, Account.Balance);
             var message = isWithdraw ? Success : Fail;
@@ -207,6 +207,7 @@ namespace Assignment.Controller
                 break;
             }
 
+            if (!Confirm.HandlerConfirm("Transfer")) return;
             var checkHandlerBalance = HandlerBalanceTranfer(Account, receiveAccount, amount);
             transaction.Status = checkHandlerBalance ? 1 : 0;
             transaction.Type = 3;
