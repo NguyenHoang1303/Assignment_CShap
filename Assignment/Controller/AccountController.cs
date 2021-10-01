@@ -407,9 +407,9 @@ namespace Assignment.Controller
             } while (true);
         }
 
-        private bool HandleCurrentPage(int totalPage)
+        private bool HandleCurrentPage(int sumRecord)
         {
-            var totalRecord = totalPage / LimitPagination + 1;
+            var totalPage = sumRecord / LimitPagination + 1;
             var exit = false;
             Console.WriteLine("enter '->' next page:");
             Console.WriteLine("enter '<-' previous page:");
@@ -419,7 +419,7 @@ namespace Assignment.Controller
             {
                 case ConsoleKey.RightArrow:
                     _currentPage++;
-                    if (_currentPage > totalRecord)
+                    if (_currentPage > totalPage)
                     {
                         _currentPage = 1;
                     }
@@ -429,7 +429,7 @@ namespace Assignment.Controller
                     _currentPage--;
                     if (_currentPage < 1)
                     {
-                        _currentPage = totalRecord;
+                        _currentPage = totalPage;
                     }
 
                     break;
